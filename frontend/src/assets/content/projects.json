@@ -1,0 +1,26 @@
+[
+  {
+    "title": "git hunt",
+    "description": "",
+    "technologies": ["HTML", "CSS", "Javascript", "Vue", "Node"],
+    "linkProject": "https://thomas-mach.github.io/githunt/",
+    "linkCode": "https://github.com/thomas-mach/githunt.git",
+    "image": "/images/projects/git-hunt.png"
+  },
+  {
+    "title": "memo game",
+    "description": "",
+    "technologies": ["HTML", "CSS", "Javascript"],
+    "linkProject": "https://thomas-mach.github.io/memo-game/",
+    "linkCode": "https://github.com/thomas-mach/memo-game.git",
+    "image": "/images/projects/memo-game.png"
+  },
+  {
+    "title": "sea battle",
+    "description": "",
+    "technologies": ["HTML", "CSS", "Javascript", "Vue.js"],
+    "linkProject": "https://thomas-mach.github.io/sea_battle/",
+    "linkCode": "https://github.com/thomas-mach/sea_battle.git",
+    "image": "/images/projects/sea-battle.png"
+  }
+]
