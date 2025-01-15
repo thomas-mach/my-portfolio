@@ -50,12 +50,18 @@
       <div class="social-links">
         <ul>
           <li>
-            <a class="social-link" href="#"
+            <a
+              class="social-link"
+              href="https://github.com/thomas-mach"
+              target="_blank"
               ><font-awesome-icon :icon="['fab', 'github']"
             /></a>
           </li>
           <li>
-            <a class="social-link" href="#"
+            <a
+              class="social-link"
+              href="https://www.linkedin.com/in/thomas-mach-b2bb2b314/"
+              target="_blank"
               ><font-awesome-icon :icon="['fab', 'linkedin']"
             /></a>
           </li>

@@ -1,27 +1,26 @@
 [
-    {
-        "title": "HTML",
-        "experience": "1 anno esperienza"
-    },
-    {
-        "title": "CSS",
-        "experience": "1 anno esperienza"
-    },
-    {
-        "title": "JavaScript",
-        "experience": "1 anno esperienza"
-    },
-    {
-        "title": "Vue.js",
-        "experience": "1 anno esperienza"
-    },
-    {
-        "title": "Node.js",
-        "experience": "1 anno esperienza"
-    },
-    {
-        "title": "SEO",
-        "experience": "1 anno esperienza"
-    }
+  {
+    "title": "HTML",
+    "experience": "2 anni esperienza"
+  },
+  {
+    "title": "CSS",
+    "experience": "2 anni esperienza"
+  },
+  {
+    "title": "JavaScript",
+    "experience": "2 anni esperienza"
+  },
+  {
+    "title": "Vue.js",
+    "experience": "1 anno esperienza"
+  },
+  {
+    "title": "Node.js",
+    "experience": "1 anno esperienza"
+  },
+  {
+    "title": "SEO",
+    "experience": "1 anno esperienza"
+  }
 ]
-  
