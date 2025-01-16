@@ -7,6 +7,15 @@ const axios = require("axios");
 const rateLimit = require("express-rate-limit");
 
 const app = express();
+
+// Serve i file statici dal build del frontend
+app.use(express.static(path.join(__dirname, "public")));
+
+// Catch-all per SPA (Single Page Application)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 const corsOptions = {
   origin: "http://localhost:5173",
   methods: "GET,POST",
