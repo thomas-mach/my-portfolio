@@ -63,8 +63,8 @@ app.post(
       template_id: process.env.EMAILJS_TEMPLATE_ID,
       user_id: process.env.EMAILJS_PUBLIC_KEY,
       template_params: {
-        from_name: name,
-        from_email: email,
+        name: name,
+        email: email,
         message: message,
       },
     };

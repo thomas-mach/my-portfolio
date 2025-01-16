@@ -64,6 +64,7 @@ a {
   /* padding:  0 .75em; */
   justify-content: space-between;
   gap: 1em;
+  font-size: 1.5rem;
 }
 
 .logo {

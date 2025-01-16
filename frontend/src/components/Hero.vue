@@ -44,7 +44,7 @@ export default {};
   max-width: 1224px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 4em;
+  /* padding-bottom: 4em; */
   user-select: none;
   /* border: 1px solid yellow; */
 }
@@ -140,7 +140,7 @@ export default {};
     justify-self: self-end;
     width: 322px;
     height: 600px;
-    background-image: url(../../public/images/foto-me.png);
+    /* background-image: url(../../public/images/foto-me.png); */
     background-size: cover;
   }
 
@@ -175,6 +175,7 @@ export default {};
   .link {
     justify-self: self-start;
     align-self: self-end;
+    margin-bottom: 2em;
   }
 }
 
@@ -193,7 +194,7 @@ export default {};
   .hero-photo {
     width: 445px;
     height: 720px;
-    background-image: url(../../public/images/foto-me.png);
+    /* background-image: url(../../public/images/foto-me.png); */
     background-position: right;
   }
 

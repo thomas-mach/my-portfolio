@@ -1,25 +1,13 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue"; // Importa il plugin Vue
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag === 'VueRecaptcha', 
-        },
-      },
-    }),
-  ],
+  root: "frontend", // La cartella con i file sorgenti
   build: {
-    rollupOptions: {
-      output: {
-        // altre opzioni di configurazione di Rollup se necessario
-      },
-    },
+    outDir: "../", // Percorso della cartella principale (portfolio)
+    emptyOutDir: false, // Non eliminare altri file nella cartella principale
   },
-  optimizeDeps: {
-    include: ['vue-recaptcha-v3'],  // Includi vue-recaptcha-v3 per l'ottimizzazione
-  },
+  plugins: [
+    vue(), // Aggiungi il plugin Vue per il supporto a Vue 3
+  ],
 });
