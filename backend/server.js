@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const axios = require("axios");
 const rateLimit = require("express-rate-limit");
+const path = require("path");
 
 const app = express();
 
@@ -17,7 +18,10 @@ app.get("*", (req, res) => {
 });
 
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin:
+    process.env.NODE_ENV === "production"
+      ? "https://www.tuodominio.com"
+      : "http://localhost:5173",
   methods: "GET,POST",
   allowedHeaders: "Content-Type",
 };
