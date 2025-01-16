@@ -17,7 +17,7 @@ app.use(cors(corsOptions));
 
 const limiter = rateLimit({
   windowMs: 24 * 60 * 60 * 1000,
-  max: 10,
+  max: 3,
   message: "Hai raggiunto il limite giornaliero di messaggi!",
 });
 
