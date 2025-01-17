@@ -98,8 +98,13 @@ export default {
 
       try {
         const response = await axios.post(
-          "http://localhost:3000/send-email",
-          this.formData
+          "https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/send-email",
+          this.formData,
+          {
+            headers: {
+              "Content-Type": "application/json", // Modifica se necessario
+            },
+          }
         );
         this.backendStatus = response.data.message;
         this.backendError = "";
