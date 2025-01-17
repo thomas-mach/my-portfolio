@@ -100,6 +100,7 @@ export default {};
   transition: color 0.3s ease-in-out;
   font-size: var(--fs-body);
   grid-area: link;
+  margin-bottom: 2em;
 }
 
 .hero-photo {
