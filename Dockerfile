@@ -2,11 +2,11 @@ FROM node:20.12.1
 
 WORKDIR /frontend
 
-COPY package*.json ./
+COPY frontend/package*.json ./
 
 RUN npm install
 
-COPY . . 
+COPY frontend/ .
 
 EXPOSE 5173
 
