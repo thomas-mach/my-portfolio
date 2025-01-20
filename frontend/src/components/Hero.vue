@@ -5,14 +5,14 @@
         <div class="hero-photo"></div>
         <img
           class="pattern-circle"
-          src="../../public/images/pattern-circle.svg"
+          src="../../images/pattern-circle.svg"
           alt="pattern-circle"
         />
       </div>
       <div class="about-wrapper">
         <img
           class="pattern-rings"
-          src="../../public/images/pattern-rings.svg"
+          src="../../images/pattern-rings.svg"
           alt="pattern-rings"
         />
         <h1 class="hero-title">
@@ -27,10 +27,6 @@
     </div>
   </section>
 </template>
-
-<script>
-export default {};
-</script>
 
 <style scoped>
 .hero-section-wrapper,
@@ -108,7 +104,7 @@ export default {};
   height: 380px;
   margin-left: auto;
   margin-right: auto;
-  background-image: url(../../public/images/foto-me.png);
+  background-image: url(../../images/foto-me.png);
   background-size: cover;
   background-position: center;
 }
@@ -141,7 +137,6 @@ export default {};
     justify-self: self-end;
     width: 322px;
     height: 600px;
-    /* background-image: url(../../public/images/foto-me.png); */
     background-size: cover;
   }
 
@@ -195,7 +190,6 @@ export default {};
   .hero-photo {
     width: 445px;
     height: 720px;
-    /* background-image: url(../../public/images/foto-me.png); */
     background-position: right;
   }
 

@@ -2,7 +2,7 @@
   <section class="technical-skills-section">
     <img
       class="pattern-rings-2"
-      src="../../public/images/pattern-rings.svg"
+      src="../../images/pattern-rings.svg"
       alt="pattern-rings"
     />
     <div class="technical-skills-wrapper">
@@ -16,20 +16,9 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import CardSkill from "./CardSkill.vue";
 import SkillsData from "../assets/content/skills.json";
-export default {
-  components: {
-    CardSkill,
-  },
-
-  data() {
-    return {
-      SkillsData,
-    };
-  },
-};
 </script>
 
 <style scoped>

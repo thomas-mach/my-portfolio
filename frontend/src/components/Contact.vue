@@ -2,7 +2,7 @@
   <section id="contact" class="section-contact">
     <img
       class="pattern-rings-3"
-      src="../../public/images/pattern-rings.svg"
+      src="../../images/pattern-rings.svg"
       alt="pattern-rings"
     />
     <div class="footer-wrapper">
@@ -14,7 +14,7 @@
           discuterne con te.
         </p>
       </div>
-      <form nonvalidate @submit.prevent="submitForm">
+      <form novalidate @submit.prevent="submitForm">
         <label for="name">nome</label>
         <input type="text" id="name" v-model="formData.name" />
         <p class="error">{{ nameError }}</p>
@@ -71,163 +71,160 @@
   </section>
 </template>
 
-<script>
+<script setup>
 import axios from "axios";
-export default {
-  name: "Contact",
+import { ref } from "vue";
+import { useStorage } from "../composables/useStorage.js";
 
-  data() {
-    return {
-      formData: {
-        name: "",
-        email: "",
-        message: "",
-      },
-      backendStatus: "",
-      backendError: "",
-      messageError: "",
-      nameError: "",
-      emailError: "",
-    };
-  },
-  methods: {
-    async submitForm() {
-      if (!this.formValidate()) {
-        return;
+const formData = ref({
+  name: useStorage("name"),
+  email: useStorage("email"),
+  message: useStorage("message"),
+});
+
+const backendStatus = ref("");
+const backendError = ref("");
+const messageError = ref("");
+const nameError = ref("");
+const emailError = ref("");
+
+async function submitForm() {
+  if (!formValidate()) {
+    return;
+  }
+
+  try {
+    const response = await axios.post(
+      "https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/send-email",
+      formData.value,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
+    );
+    backendStatus.value = response.data.message;
+    backendError.value = "";
+    localStorage.clear();
+    clearFields();
+  } catch (error) {
+    console.error("Errore di backend:", error.response);
 
-      try {
-        const response = await axios.post(
-          "https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/send-email",
-          this.formData,
-          {
-            headers: {
-              "Content-Type": "application/json", // Modifica se necessario
-            },
-          }
-        );
-        this.backendStatus = response.data.message;
-        this.backendError = "";
-        this.clearFields();
-      } catch (error) {
-        console.error("Errore di backend:", error.response);
+    if (error.response && error.response.status === 429) {
+      backendError.value = error.response.data;
+    } else if (error.response && error.response.data.errors) {
+      emailError.value = "";
+      nameError.value = "";
+      messageError.value = "";
 
-        if (error.response && error.response.status === 429) {
-          this.backendError = error.response.data;
-        } else if (error.response && error.response.data.errors) {
-          this.emailError = "";
-          this.nameError = "";
-          this.messageError = "";
+      let emailErrorSet = false;
+      let nameErrorSet = false;
+      let messageErrorSet = false;
 
-          let emailErrorSet = false;
-          let nameErrorSet = false;
-          let messageErrorSet = false;
-
-          error.response.data.errors.forEach((err) => {
-            if (err.path === "email" && !emailErrorSet) {
-              this.emailError = err.msg;
-              emailErrorSet = true;
-            } else if (err.path === "name" && !nameErrorSet) {
-              this.nameError = err.msg;
-              nameErrorSet = true;
-            } else if (err.path === "message" && !messageErrorSet) {
-              this.messageError = err.msg;
-              messageErrorSet = true;
-            }
-          });
-
-          this.backendStatus = "";
-        } else {
-          this.backendError =
-            error.response?.data?.error ||
-            "C'è stato un errore nell'invio dell'email!";
-          this.backendStatus = "";
+      error.response.data.errors.forEach((err) => {
+        if (err.path === "email" && !emailErrorSet) {
+          emailError.value = err.msg;
+          emailErrorSet = true;
+        } else if (err.path === "name" && !nameErrorSet) {
+          nameError.value = err.msg;
+          nameErrorSet = true;
+        } else if (err.path === "message" && !messageErrorSet) {
+          messageError.value = err.msg;
+          messageErrorSet = true;
         }
-      } finally {
-        setTimeout(() => {
-          this.backendStatus = "";
-          this.backendError = "";
-        }, 8000);
-      }
-    },
-    validateEmail(email) {
-      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return regex.test(email);
-    },
+      });
 
-    validateName(name) {
-      const nameRegex = /^[a-zA-Zà-žÀ-Ž\s'-]+$/;
+      backendStatus.value = "";
+    } else {
+      backendError.value =
+        error.response?.data?.error ||
+        "C'è stato un errore nell'invio dell'email!";
+      backendStatus.value = "";
+    }
+  } finally {
+    setTimeout(() => {
+      backendStatus.value = "";
+      backendError.value = "";
+    }, 8000);
+  }
+}
 
-      if (!name.trim()) {
-        return "Campo obbligatorio!";
-      }
+function validateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
 
-      if (name.trim().length < 2 || name.trim().length > 50) {
-        return "Il nome deve avere da 2 a 50 caratteri";
-      }
+function validateName(name) {
+  const nameRegex = /^[a-zA-Zà-žÀ-Ž\s'-]+$/;
 
-      if (!nameRegex.test(name)) {
-        return "Il nome contiene caratteri non validi!";
-      }
+  if (!name.trim()) {
+    return "Campo obbligatorio!";
+  }
 
-      if (/\s{2,}/.test(name)) {
-        return "Il nome non può contenere spazi consecutivi!";
-      }
+  if (name.trim().length < 2 || name.trim().length > 50) {
+    return "Il nome deve avere da 2 a 50 caratteri";
+  }
 
-      return null;
-    },
+  if (!nameRegex.test(name)) {
+    return "Il nome contiene caratteri non validi!";
+  }
 
-    validateMessage(message) {
-      if (!message.trim()) {
-        return "Campo obbligatorio!";
-      }
+  if (/\s{2,}/.test(name)) {
+    return "Il nome non può contenere spazi consecutivi!";
+  }
 
-      if (message.trim().length < 10 || message.trim().length > 1000) {
-        return "Il messasggio deve avere da 10 a 1000 caratteri!";
-      }
+  return null;
+}
 
-      return null;
-    },
+function validateMessage(message) {
+  if (!message.trim()) {
+    return "Campo obbligatorio!";
+  }
 
-    formValidate() {
-      let isValid = true;
-      const email = this.validateEmail(this.formData.email);
-      if (!email) {
-        this.emailError = "Email non valida!";
-        isValid = false;
-      } else {
-        this.emailError = "";
-      }
+  if (message.trim().length < 10 || message.trim().length > 1000) {
+    return "Il messasggio deve avere da 10 a 1000 caratteri!";
+  }
 
-      const errorName = this.validateName(this.formData.name);
-      if (errorName) {
-        this.nameError = errorName;
-        isValid = false;
-      } else {
-        this.nameError = "";
-      }
+  return null;
+}
 
-      const errorMessage = this.validateMessage(this.formData.message);
-      if (errorMessage) {
-        this.messageError = errorMessage;
-        isValid = false;
-      } else {
-        this.messageError = "";
-      }
+function formValidate() {
+  let isValid = true;
+  const email = validateEmail(formData.value.email);
+  if (!email) {
+    emailError.value = "Email non valida!";
+    isValid = false;
+  } else {
+    emailError.value = "";
+  }
 
-      return isValid;
-    },
+  const errorName = validateName(formData.value.name);
+  if (errorName) {
+    nameError.value = errorName;
+    isValid = false;
+  } else {
+    nameError.value = "";
+  }
 
-    clearFields() {
-      this.formData.name = "";
-      this.formData.email = "";
-      this.formData.message = "";
-      this.emailError = "";
-      this.nameError = "";
-      this.messageError = "";
-    },
-  },
-};
+  const errorMessage = validateMessage(formData.value.message);
+  if (errorMessage) {
+    messageError.value = errorMessage;
+    isValid = false;
+  } else {
+    messageError.value = "";
+  }
+
+  return isValid;
+}
+
+function clearFields() {
+  formData.value.name = "";
+  formData.value.email = "";
+  formData.value.message = "";
+  emailError.value = "";
+  nameError.value = "";
+  messageError.value = "";
+}
 </script>
 
 <style scoped>

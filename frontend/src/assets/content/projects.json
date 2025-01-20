@@ -2,7 +2,7 @@
   {
     "title": "git hunt",
     "description": "",
-    "technologies": ["HTML", "CSS", "Javascript", "Vue", "Node"],
+    "technologies": ["HTML", "CSS", "Javascript", "Vue.js", "Node.js"],
     "linkProject": "https://thomas-mach.github.io/githunt/",
     "linkCode": "https://github.com/thomas-mach/githunt.git",
     "image": "/images/projects/git-hunt.png"
