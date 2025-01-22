@@ -31,7 +31,7 @@ defineProps({
   width: 95svw;
   /* height: 80svh; */
   max-width: 600px;
-  background-color: var(--clr-accent);
+  background-color: var(--clr-light-dark);
   padding: 1em;
   border-radius: 10px;
 }
