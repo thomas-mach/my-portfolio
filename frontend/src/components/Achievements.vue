@@ -45,6 +45,7 @@ let propURL = ref("");
 .achievement-thumb {
   width: 100px;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 }
 
 .achievements-section-wrapper {
@@ -66,5 +67,11 @@ let propURL = ref("");
   display: flex;
   flex-wrap: wrap;
   gap: 1em;
+}
+
+@media (min-width: 600px) {
+  .achievement-thumb:hover {
+    transform: scale(1.1);
+  }
 }
 </style>
