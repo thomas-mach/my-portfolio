@@ -5,14 +5,14 @@
         <div class="hero-photo"></div>
         <img
           class="pattern-circle"
-          src="../../images/pattern-circle.svg"
+          src="/images/pattern-circle.svg"
           alt="pattern-circle"
         />
       </div>
       <div class="about-wrapper">
         <img
           class="pattern-rings"
-          src="../../images/pattern-rings.svg"
+          src="/images/pattern-rings.svg"
           alt="pattern-rings"
         />
         <h1 class="hero-title">

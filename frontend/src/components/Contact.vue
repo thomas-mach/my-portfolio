@@ -2,7 +2,7 @@
   <section id="contact" class="section-contact">
     <img
       class="pattern-rings-3"
-      src="../../images/pattern-rings.svg"
+      src="/images/pattern-rings.svg"
       alt="pattern-rings"
     />
     <div class="footer-wrapper">

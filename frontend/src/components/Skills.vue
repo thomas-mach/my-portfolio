@@ -2,7 +2,7 @@
   <section class="technical-skills-section">
     <img
       class="pattern-rings-2"
-      src="../../images/pattern-rings.svg"
+      src="/images/pattern-rings.svg"
       alt="pattern-rings"
     />
     <div class="technical-skills-wrapper">
