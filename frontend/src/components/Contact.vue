@@ -15,20 +15,38 @@
         </p>
       </div>
       <form novalidate @submit.prevent="submitForm">
-        <label for="name">nome</label>
-        <input type="text" id="name" v-model="formData.name" />
+        <div
+          class="input-wrapper"
+          :class="{ shake: !isValidname }"
+          @animationend="removeShakeClass"
+        >
+          <label for="name">nome</label>
+          <input type="text" id="name" v-model="formData.name" />
+        </div>
         <p class="error">{{ nameError }}</p>
-        <label for="email">email</label>
-        <input type="text" id="email" v-model="formData.email" />
+        <div
+          class="input-wrapper"
+          :class="{ shake: !isValidmail }"
+          @animationend="removeShakeClass"
+        >
+          <label for="email">email</label>
+          <input type="text" id="email" v-model="formData.email" />
+        </div>
         <p class="error">{{ emailError }}</p>
-        <label for="message">messaggio</label>
-        <textarea
-          name=""
-          id="message"
-          cols="30"
-          rows="4"
-          v-model="formData.message"
-        ></textarea>
+        <div
+          class="input-wrapper"
+          :class="{ shake: !isValidmessage }"
+          @animationend="removeShakeClass"
+        >
+          <label for="message">messaggio</label>
+          <textarea
+            name=""
+            id="message"
+            cols="30"
+            rows="4"
+            v-model="formData.message"
+          ></textarea>
+        </div>
         <p class="error">{{ messageError }}</p>
         <button class="btn" type="submit">Invia messaggio</button>
         <div class="message-placeholder">
@@ -87,10 +105,14 @@ const backendError = ref("");
 const messageError = ref("");
 const nameError = ref("");
 const emailError = ref("");
+let isValidname = ref(true);
+let isValidmail = ref(true);
+let isValidmessage = ref(true);
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 async function submitForm() {
+  formValidate();
   if (!formValidate()) {
     return;
   }
@@ -189,10 +211,12 @@ function validateMessage(message) {
 
 function formValidate() {
   let isValid = true;
+  isValidmail.value = true;
   const email = validateEmail(formData.value.email);
   if (!email) {
     emailError.value = "Email non valida!";
     isValid = false;
+    isValidmail.value = false;
   } else {
     emailError.value = "";
   }
@@ -201,6 +225,7 @@ function formValidate() {
   if (errorName) {
     nameError.value = errorName;
     isValid = false;
+    isValidname.value = false;
   } else {
     nameError.value = "";
   }
@@ -209,6 +234,7 @@ function formValidate() {
   if (errorMessage) {
     messageError.value = errorMessage;
     isValid = false;
+    isValidmessage.value = false;
   } else {
     messageError.value = "";
   }
@@ -223,6 +249,12 @@ function clearFields() {
   emailError.value = "";
   nameError.value = "";
   messageError.value = "";
+}
+
+function removeShakeClass() {
+  isValidname.value = true;
+  isValidmail.value = true;
+  isValidmessage.value = true;
 }
 </script>
 
@@ -374,6 +406,33 @@ textarea:focus {
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.shake {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 
 @media (min-width: 600px) {
