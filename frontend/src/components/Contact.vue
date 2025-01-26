@@ -88,21 +88,20 @@ const messageError = ref("");
 const nameError = ref("");
 const emailError = ref("");
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 async function submitForm() {
   if (!formValidate()) {
     return;
   }
 
   try {
-    const response = await axios.post(
-      "https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/send-email",
-      formData.value,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await axios.post(apiUrl, formData.value, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log("Response from backend", response.data);
     backendStatus.value = response.data.message;
     backendError.value = "";
     localStorage.clear();
@@ -145,7 +144,7 @@ async function submitForm() {
     setTimeout(() => {
       backendStatus.value = "";
       backendError.value = "";
-    }, 8000);
+    }, 7000);
   }
 }
 

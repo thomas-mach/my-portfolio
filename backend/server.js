@@ -18,10 +18,7 @@ app.get("*", (req, res) => {
 });
 
 const corsOptions = {
-  origin:
-    process.env.NODE_ENV === "production"
-      ? "https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com"
-      : "http://localhost:5173",
+  origin: process.env.FRONTEND_URL,
   methods: "GET,POST",
   allowedHeaders: "Content-Type",
 };
@@ -30,7 +27,7 @@ app.use(cors(corsOptions));
 
 const limiter = rateLimit({
   windowMs: 24 * 60 * 60 * 1000,
-  max: 3,
+  max: 10,
   message: "Hai raggiunto il limite giornaliero di messaggi!",
 });
 
