@@ -10,36 +10,20 @@ const path = require('path');
 const os = require('os');
 
 const app = express();
+const corsOptions = {
+  // origin: process.env.FRONTEND_URL,
+  origin: '*',
+  methods: 'GET,POST, OPTIONS',
+  allowedHeaders: 'Content-Type',
+};
+app.use(cors(corsOptions));
 
 // Serve i file statici dal build del frontend
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Catch-all per SPA (Single Page Application)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-const corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  methods: 'GET,POST',
-  allowedHeaders: 'Content-Type',
-};
-
-app.use(cors(corsOptions));
-
-const limiter = rateLimit({
-  windowMs: 24 * 60 * 60 * 1000,
-  max: 10,
-  message: 'Hai raggiunto il limite giornaliero di messaggi!',
-});
-
-app.use(bodyParser.json());
-
-const PORT = process.env.PORT || 3000;
-
-app.get('/image/:filename', (req, res) => {
+app.get('/images/:filename', (req, res) => {
   const { filename } = req.params;
-  const imagePath = path.join(__dirname, 'public', 'assets', filename); // Percorso dell'immagine
+  const imagePath = path.join(__dirname, 'public', filename); // Percorso dell'immagine
 
   // Verifica se il file esiste
   fs.access(imagePath, fs.constants.F_OK, (err) => {
@@ -63,6 +47,8 @@ app.get('/image/:filename', (req, res) => {
     const imageStream = fs.createReadStream(imagePath);
     imageStream.pipe(res);
 
+    imageStream.on('open', () => console.log('📡 Streaming in corso...'));
+
     // Gestione errori
     imageStream.on('error', (err) => {
       console.error('Errore durante lo streaming del file:', err);
@@ -70,6 +56,21 @@ app.get('/image/:filename', (req, res) => {
     });
   });
 });
+
+// Catch-all per SPA (Single Page Application)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+const limiter = rateLimit({
+  windowMs: 24 * 60 * 60 * 1000,
+  max: 10,
+  message: 'Hai raggiunto il limite giornaliero di messaggi!',
+});
+
+app.use(bodyParser.json());
+
+const PORT = process.env.PORT || 3000;
 
 app.post(
   '/send-email',
@@ -140,22 +141,22 @@ app.post(
   }
 );
 
-setInterval(() => {
-  const memoryUsage = process.memoryUsage(); // Uso memoria del processo
-  const freeMem = os.freemem() / 1e6; // RAM libera in MB
-  const totalMem = os.totalmem() / 1e6; // RAM totale in MB
+// setInterval(() => {
+//   const memoryUsage = process.memoryUsage(); // Uso memoria del processo
+//   const freeMem = os.freemem() / 1e6; // RAM libera in MB
+//   const totalMem = os.totalmem() / 1e6; // RAM totale in MB
 
-  console.log('🔹 Memoria usata (MB):', (memoryUsage.rss / 1e6).toFixed(2));
-  console.log(
-    '🔹 Memoria libera (MB):',
-    freeMem.toFixed(2),
-    '/',
-    totalMem.toFixed(2)
-  );
-  console.log('🔹 Numero CPU:', os.cpus().length);
-  console.log('🔹 Uptime server (minuti):', (os.uptime() / 60).toFixed(2));
-  console.log('----------------------------');
-}, 5000); // Stampa ogni 5 secondi
+//   console.log('🔹 Memoria usata (MB):', (memoryUsage.rss / 1e6).toFixed(2));
+//   console.log(
+//     '🔹 Memoria libera (MB):',
+//     freeMem.toFixed(2),
+//     '/',
+//     totalMem.toFixed(2)
+//   );
+//   console.log('🔹 Numero CPU:', os.cpus().length);
+//   console.log('🔹 Uptime server (minuti):', (os.uptime() / 60).toFixed(2));
+//   console.log('----------------------------');
+// }, 5000); // Stampa ogni 5 secondi
 
 app.listen(PORT, () => {
   console.log(`Server backend in esecuzione su http://localhost:${PORT}`);

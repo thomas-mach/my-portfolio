@@ -1,0 +1,73 @@
+{
+  "index.html": {
+    "file": "assets/index-CHS6e6Yb.js",
+    "name": "index",
+    "src": "index.html",
+    "isEntry": true,
+    "css": [
+      "assets/index-DE0xVbqe.css"
+    ],
+    "assets": [
+      "assets/space-grotesk-vietnamese-300-normal-DwTfb7sJ.woff2",
+      "assets/space-grotesk-vietnamese-300-normal-DdSifEBK.woff",
+      "assets/space-grotesk-latin-ext-300-normal-CadKe17T.woff2",
+      "assets/space-grotesk-latin-ext-300-normal-CleZWuYp.woff",
+      "assets/space-grotesk-latin-300-normal-CNSJ6809.woff2",
+      "assets/space-grotesk-latin-300-normal-D29DUD-1.woff",
+      "assets/space-grotesk-vietnamese-700-normal-CCX1ne2N.woff2",
+      "assets/space-grotesk-vietnamese-700-normal-BWtyAlKv.woff",
+      "assets/space-grotesk-latin-ext-700-normal-CXJ4FkXv.woff2",
+      "assets/space-grotesk-latin-ext-700-normal-DWId6XrS.woff",
+      "assets/space-grotesk-latin-700-normal-DUDKB872.woff2",
+      "assets/space-grotesk-latin-700-normal-XTACPmcu.woff"
+    ]
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-300-normal.woff": {
+    "file": "assets/space-grotesk-latin-300-normal-D29DUD-1.woff",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-300-normal.woff"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-300-normal.woff2": {
+    "file": "assets/space-grotesk-latin-300-normal-CNSJ6809.woff2",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-300-normal.woff2"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff": {
+    "file": "assets/space-grotesk-latin-700-normal-XTACPmcu.woff",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2": {
+    "file": "assets/space-grotesk-latin-700-normal-DUDKB872.woff2",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff2"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-300-normal.woff": {
+    "file": "assets/space-grotesk-latin-ext-300-normal-CleZWuYp.woff",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-300-normal.woff"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-300-normal.woff2": {
+    "file": "assets/space-grotesk-latin-ext-300-normal-CadKe17T.woff2",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-300-normal.woff2"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-700-normal.woff": {
+    "file": "assets/space-grotesk-latin-ext-700-normal-DWId6XrS.woff",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-700-normal.woff"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-700-normal.woff2": {
+    "file": "assets/space-grotesk-latin-ext-700-normal-CXJ4FkXv.woff2",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-latin-ext-700-normal.woff2"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-300-normal.woff": {
+    "file": "assets/space-grotesk-vietnamese-300-normal-DdSifEBK.woff",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-300-normal.woff"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-300-normal.woff2": {
+    "file": "assets/space-grotesk-vietnamese-300-normal-DwTfb7sJ.woff2",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-300-normal.woff2"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-700-normal.woff": {
+    "file": "assets/space-grotesk-vietnamese-700-normal-BWtyAlKv.woff",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-700-normal.woff"
+  },
+  "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-700-normal.woff2": {
+    "file": "assets/space-grotesk-vietnamese-700-normal-CCX1ne2N.woff2",
+    "src": "node_modules/@fontsource/space-grotesk/files/space-grotesk-vietnamese-700-normal.woff2"
+  }
+}
