@@ -17,6 +17,7 @@
   --clr-light: #ffffff;
   --clr-light-dark: #d9d9d9;
   --clr-accent: #4ee1a0;
+  --clr-error: #ef4444;
 
   --fs-h1: 2.5rem;
   --fs-h2: 2rem;
@@ -96,4 +97,10 @@ textarea {
   font: inherit;
   box-shadow: none;
   appearance: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent; /* iOS */
+  outline: none;
 }

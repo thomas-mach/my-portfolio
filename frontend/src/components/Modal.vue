@@ -1,10 +1,12 @@
 <template>
-  <div v-if="show" class="modal-mask">
-    <div class="wrapper">
-      <!-- <button class="close-modal" @click="$emit('close')">close</button> -->
-      <img :src="src" alt="" />
+  <transition name="modal">
+    <div v-if="show" class="modal-mask">
+      <div class="wrapper">
+        <!-- <button class="close-modal" @click="$emit('close')">close</button> -->
+        <img :src="src" alt="" />
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script setup>
@@ -41,5 +43,15 @@ img {
   height: 100%;
   object-fit: cover;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
 }
 </style>

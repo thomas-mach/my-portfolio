@@ -2,7 +2,7 @@
   <section>
     <div class="hero-section-wrapper">
       <div class="photo-wrapper">
-        <div class="hero-photo"></div>
+        <div class="hero-photo" :style="backgroundStyle"></div>
         <img
           class="pattern-circle"
           src="/images/pattern-circle.svg"
@@ -27,6 +27,41 @@
     </div>
   </section>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const backgroundStyle = ref({});
+
+// Funzione per caricare l'immagine di sfondo dinamicamente
+const loadImageUrl = async () => {
+  try {
+    // Carica il manifest.json
+    const response = await fetch('/assets/manifest.json');
+    const manifest = await response.json();
+
+    // Estrai il percorso corretto dell'immagine
+    const imageFile = manifest['assets/foto-me.png']; // Usa il nome originale del file immagine
+    if (imageFile) {
+      // Imposta lo stile dinamico per il background
+      backgroundStyle.value = {
+        backgroundImage: `url(/assets/${imageFile.file})`, // Imposta il percorso corretto
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      };
+    }
+  } catch (error) {
+    console.error('Errore durante il caricamento del manifest:', error);
+  }
+};
+
+// Carica l'immagine al momento del montaggio del componente
+onMounted(loadImageUrl);
+
+return {
+  backgroundStyle, // Ritorna lo stile dinamico
+};
+</script>
 
 <style scoped>
 .hero-section-wrapper,
@@ -58,9 +93,9 @@
   grid-template-columns: 1fr;
   justify-items: center;
   grid-template-areas:
-    "title"
-    "text"
-    "link";
+    'title'
+    'text'
+    'link';
 }
 
 .hero-title {

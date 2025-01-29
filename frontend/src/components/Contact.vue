@@ -1,17 +1,12 @@
 <template>
   <section id="contact" class="section-contact">
-    <img
-      class="pattern-rings-3"
-      src="/images/pattern-rings.svg"
-      alt="pattern-rings"
-    />
+    <img class="pattern-rings-3" src="/images/pattern-rings.svg" alt="pattern-rings" />
     <div class="footer-wrapper">
       <div class="title-wrapper">
         <h3 class="footer-title">Contatto</h3>
         <p class="footer-text">
-          Sono appassionato di progetti innovativi come front-end developer e
-          sempre aperto a nuove collaborazioni. Contattami e sarò felice di
-          discuterne con te.
+          Sono appassionato di progetti innovativi come front-end developer e sempre
+          aperto a nuove collaborazioni. Contattami e sarò felice di discuterne con te.
         </p>
       </div>
       <form novalidate @submit.prevent="submitForm">
@@ -68,10 +63,7 @@
       <div class="social-links">
         <ul>
           <li>
-            <a
-              class="social-link"
-              href="https://github.com/thomas-mach"
-              target="_blank"
+            <a class="social-link" href="https://github.com/thomas-mach" target="_blank"
               ><font-awesome-icon :icon="['fab', 'github']"
             /></a>
           </li>
@@ -90,21 +82,21 @@
 </template>
 
 <script setup>
-import axios from "axios";
-import { ref } from "vue";
-import { useStorage } from "../composables/useStorage.js";
+import axios from 'axios';
+import { ref } from 'vue';
+import { useStorage } from '../composables/useStorage.js';
 
 const formData = ref({
-  name: useStorage("name"),
-  email: useStorage("email"),
-  message: useStorage("message"),
+  name: useStorage('name'),
+  email: useStorage('email'),
+  message: useStorage('message'),
 });
 
-const backendStatus = ref("");
-const backendError = ref("");
-const messageError = ref("");
-const nameError = ref("");
-const emailError = ref("");
+const backendStatus = ref('');
+const backendError = ref('');
+const messageError = ref('');
+const nameError = ref('');
+const emailError = ref('');
 let isValidname = ref(true);
 let isValidmail = ref(true);
 let isValidmessage = ref(true);
@@ -120,52 +112,51 @@ async function submitForm() {
   try {
     const response = await axios.post(apiUrl, formData.value, {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
-    console.log("Response from backend", response.data);
+    console.log('Response from backend', response.data);
     backendStatus.value = response.data.message;
-    backendError.value = "";
+    backendError.value = '';
     localStorage.clear();
     clearFields();
   } catch (error) {
-    console.error("Errore di backend:", error.response);
+    console.error('Errore di backend:', error.response);
 
     if (error.response && error.response.status === 429) {
       backendError.value = error.response.data;
     } else if (error.response && error.response.data.errors) {
-      emailError.value = "";
-      nameError.value = "";
-      messageError.value = "";
+      emailError.value = '';
+      nameError.value = '';
+      messageError.value = '';
 
       let emailErrorSet = false;
       let nameErrorSet = false;
       let messageErrorSet = false;
 
       error.response.data.errors.forEach((err) => {
-        if (err.path === "email" && !emailErrorSet) {
+        if (err.path === 'email' && !emailErrorSet) {
           emailError.value = err.msg;
           emailErrorSet = true;
-        } else if (err.path === "name" && !nameErrorSet) {
+        } else if (err.path === 'name' && !nameErrorSet) {
           nameError.value = err.msg;
           nameErrorSet = true;
-        } else if (err.path === "message" && !messageErrorSet) {
+        } else if (err.path === 'message' && !messageErrorSet) {
           messageError.value = err.msg;
           messageErrorSet = true;
         }
       });
 
-      backendStatus.value = "";
+      backendStatus.value = '';
     } else {
       backendError.value =
-        error.response?.data?.error ||
-        "C'è stato un errore nell'invio dell'email!";
-      backendStatus.value = "";
+        error.response?.data?.error || "C'è stato un errore nell'invio dell'email!";
+      backendStatus.value = '';
     }
   } finally {
     setTimeout(() => {
-      backendStatus.value = "";
-      backendError.value = "";
+      backendStatus.value = '';
+      backendError.value = '';
     }, 7000);
   }
 }
@@ -179,19 +170,19 @@ function validateName(name) {
   const nameRegex = /^[a-zA-Zà-žÀ-Ž\s'-]+$/;
 
   if (!name.trim()) {
-    return "Campo obbligatorio!";
+    return 'Campo obbligatorio!';
   }
 
   if (name.trim().length < 2 || name.trim().length > 50) {
-    return "Il nome deve avere da 2 a 50 caratteri";
+    return 'Il nome deve avere da 2 a 50 caratteri';
   }
 
   if (!nameRegex.test(name)) {
-    return "Il nome contiene caratteri non validi!";
+    return 'Il nome contiene caratteri non validi!';
   }
 
   if (/\s{2,}/.test(name)) {
-    return "Il nome non può contenere spazi consecutivi!";
+    return 'Il nome non può contenere spazi consecutivi!';
   }
 
   return null;
@@ -199,11 +190,11 @@ function validateName(name) {
 
 function validateMessage(message) {
   if (!message.trim()) {
-    return "Campo obbligatorio!";
+    return 'Campo obbligatorio!';
   }
 
   if (message.trim().length < 10 || message.trim().length > 1000) {
-    return "Il messasggio deve avere da 10 a 1000 caratteri!";
+    return 'Il messasggio deve avere da 10 a 1000 caratteri!';
   }
 
   return null;
@@ -214,11 +205,11 @@ function formValidate() {
   isValidmail.value = true;
   const email = validateEmail(formData.value.email);
   if (!email) {
-    emailError.value = "Email non valida!";
+    emailError.value = 'Email non valida!';
     isValid = false;
     isValidmail.value = false;
   } else {
-    emailError.value = "";
+    emailError.value = '';
   }
 
   const errorName = validateName(formData.value.name);
@@ -227,7 +218,7 @@ function formValidate() {
     isValid = false;
     isValidname.value = false;
   } else {
-    nameError.value = "";
+    nameError.value = '';
   }
 
   const errorMessage = validateMessage(formData.value.message);
@@ -236,19 +227,19 @@ function formValidate() {
     isValid = false;
     isValidmessage.value = false;
   } else {
-    messageError.value = "";
+    messageError.value = '';
   }
 
   return isValid;
 }
 
 function clearFields() {
-  formData.value.name = "";
-  formData.value.email = "";
-  formData.value.message = "";
-  emailError.value = "";
-  nameError.value = "";
-  messageError.value = "";
+  formData.value.name = '';
+  formData.value.email = '';
+  formData.value.message = '';
+  emailError.value = '';
+  nameError.value = '';
+  messageError.value = '';
 }
 
 function removeShakeClass() {
@@ -301,7 +292,7 @@ form {
 }
 
 .error {
-  color: red;
+  color: var(--clr-error);
   font-size: 0.75rem;
   height: 1rem;
   text-align: right;
@@ -339,6 +330,11 @@ textarea:focus {
   padding: 0 0 0.75em 0;
   transition: color 0.3s ease-in-out;
   cursor: pointer;
+}
+
+.btn:active {
+  background-color: transparent;
+  color: var(--clr-accent);
 }
 
 .logo-social-wrapper {
@@ -386,11 +382,11 @@ textarea:focus {
 }
 
 .message-success {
-  color: rgb(18, 210, 18);
+  color: var(--clr-accent);
 }
 
 .message-error {
-  color: rgb(238, 31, 31);
+  color: var(--clr-error);
 }
 
 .fade-enter-active,
