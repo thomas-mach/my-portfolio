@@ -33,25 +33,28 @@ import { ref, onMounted } from 'vue';
 
 const backgroundStyle = ref({});
 
-// Funzione per caricare l'immagine di sfondo dinamicamente
+// Funzione per caricare l'immagine come stream dal backend
 const loadImageUrl = async () => {
   try {
-    // Carica il manifest.json
-    const response = await fetch('/assets/manifest.json');
-    const manifest = await response.json();
+    // Ottieni l'immagine dallo stream dal backend (endpoint API)
+    const response = await fetch('http://localhost:3000/images/foto-me.png');
 
-    // Estrai il percorso corretto dell'immagine
-    const imageFile = manifest['assets/foto-me.png']; // Usa il nome originale del file immagine
-    if (imageFile) {
+    if (response.ok) {
+      // Converte la risposta in un blob (oggetto binario)
+      const imageBlob = await response.blob();
+
+      // Crea un URL temporaneo per il blob ricevuto
+      const imageUrl = URL.createObjectURL(imageBlob);
+
       // Imposta lo stile dinamico per il background
       backgroundStyle.value = {
-        backgroundImage: `url(/assets/${imageFile.file})`, // Imposta il percorso corretto
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundImage: `url(${imageUrl})`, // Usa l'URL temporaneo come background
       };
+    } else {
+      console.error("Errore nel caricamento dell'immagine");
     }
   } catch (error) {
-    console.error('Errore durante il caricamento del manifest:', error);
+    console.error("Errore durante il caricamento dell'immagine:", error);
   }
 };
 
@@ -135,7 +138,7 @@ onMounted(loadImageUrl);
   height: 380px;
   margin-left: auto;
   margin-right: auto;
-  background-image: url(../../images/foto-me.png);
+  /* background-image: url(../../images/foto-me.png); */
   background-size: cover;
   background-position: center;
 }
