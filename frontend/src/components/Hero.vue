@@ -37,10 +37,11 @@ const backgroundStyle = ref({});
 const loadImageUrl = async () => {
   const imageUrl =
     'https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/images/foto-me.png';
+  const imageUrlLocal = 'http://localhost:5173/images/foto-me.png';
 
   try {
     // Ottieni l'immagine dallo stream dal backend (endpoint API)
-    const response = await fetch(imageUrl);
+    const response = await fetch(imageUrlLocal);
 
     if (response.ok) {
       // Converte la risposta in un blob (oggetto binario)
@@ -86,6 +87,8 @@ onMounted(loadImageUrl);
   grid-area: photo;
   overflow: hidden;
   z-index: 120;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .about-wrapper {
