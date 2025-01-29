@@ -57,10 +57,6 @@ const loadImageUrl = async () => {
 
 // Carica l'immagine al momento del montaggio del componente
 onMounted(loadImageUrl);
-
-return {
-  backgroundStyle, // Ritorna lo stile dinamico
-};
 </script>
 
 <style scoped>
