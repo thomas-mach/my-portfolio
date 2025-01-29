@@ -11,9 +11,9 @@ const os = require('os');
 
 const app = express();
 const corsOptions = {
-  // origin: process.env.FRONTEND_URL,
-  origin: '*',
-  methods: 'GET,POST, OPTIONS',
+  origin: process.env.FRONTEND_URL,
+  // origin: '*',
+  methods: 'GET,POST',
   allowedHeaders: 'Content-Type',
 };
 app.use(cors(corsOptions));
