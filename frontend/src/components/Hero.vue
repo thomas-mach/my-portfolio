@@ -35,9 +35,12 @@ const backgroundStyle = ref({});
 
 // Funzione per caricare l'immagine come stream dal backend
 const loadImageUrl = async () => {
+  const imageUrl =
+    'https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/images/foto-me.png';
+
   try {
     // Ottieni l'immagine dallo stream dal backend (endpoint API)
-    const response = await fetch('http://localhost:3000/images/foto-me.png');
+    const response = await fetch(imageUrl);
 
     if (response.ok) {
       // Converte la risposta in un blob (oggetto binario)
