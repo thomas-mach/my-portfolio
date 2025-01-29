@@ -41,7 +41,7 @@ const loadImageUrl = async () => {
 
   try {
     // Ottieni l'immagine dallo stream dal backend (endpoint API)
-    const response = await fetch(imageUrlLocal);
+    const response = await fetch(imageUrl);
 
     if (response.ok) {
       // Converte la risposta in un blob (oggetto binario)
