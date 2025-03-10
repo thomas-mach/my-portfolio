@@ -12,6 +12,8 @@
         :technologies="project.technologies"
         :linkProject="project.linkProject"
         :linkCode="project.linkCode"
+        :linkCodeFrontend="project.linkCodeFrontend"
+        :linkCodeBackend="project.linkCodeBackend"
         :image="project.image"
       />
     </div>
@@ -19,8 +21,8 @@
 </template>
 
 <script setup>
-import CardProject from "./CardProject.vue";
-import ProjectsData from "../assets/content/projects.json";
+import CardProject from './CardProject.vue';
+import ProjectsData from '../assets/content/projects.json';
 </script>
 
 <style scoped>

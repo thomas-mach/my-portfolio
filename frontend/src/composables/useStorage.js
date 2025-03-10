@@ -1,4 +1,4 @@
-import { ref, watch } from "vue";
+import { ref, watch } from 'vue';
 
 export function useStorage(key) {
   let storedVal = localStorage.getItem(key);

@@ -1,12 +1,17 @@
 <template>
   <section id="contact" class="section-contact">
-    <img class="pattern-rings-3" src="/images/pattern-rings.svg" alt="pattern-rings" />
+    <img
+      class="pattern-rings-3"
+      src="/images/pattern-rings.svg"
+      alt="pattern-rings"
+    />
     <div class="footer-wrapper">
       <div class="title-wrapper">
         <h3 class="footer-title">Contatto</h3>
         <p class="footer-text">
-          Sono appassionato di progetti innovativi come front-end developer e sempre
-          aperto a nuove collaborazioni. Contattami e sarò felice di discuterne con te.
+          Sono appassionato di progetti innovativi come front-end developer e
+          sempre aperto a nuove collaborazioni. Contattami e sarò felice di
+          discuterne con te.
         </p>
       </div>
       <form novalidate @submit.prevent="submitForm">
@@ -63,7 +68,10 @@
       <div class="social-links">
         <ul>
           <li>
-            <a class="social-link" href="https://github.com/thomas-mach" target="_blank"
+            <a
+              class="social-link"
+              href="https://github.com/thomas-mach"
+              target="_blank"
               ><font-awesome-icon :icon="['fab', 'github']"
             /></a>
           </li>
@@ -104,7 +112,6 @@ let isValidmessage = ref(true);
 const apiUrl = import.meta.env.VITE_API_URL;
 
 async function submitForm() {
-  formValidate();
   if (!formValidate()) {
     return;
   }
@@ -115,7 +122,6 @@ async function submitForm() {
         'Content-Type': 'application/json',
       },
     });
-    console.log('Response from backend', response.data);
     backendStatus.value = response.data.message;
     backendError.value = '';
     localStorage.clear();
@@ -150,7 +156,8 @@ async function submitForm() {
       backendStatus.value = '';
     } else {
       backendError.value =
-        error.response?.data?.error || "C'è stato un errore nell'invio dell'email!";
+        error.response?.data?.error ||
+        "C'è stato un errore nell'invio dell'email!";
       backendStatus.value = '';
     }
   } finally {
@@ -169,7 +176,7 @@ function validateEmail(email) {
 function validateName(name) {
   const nameRegex = /^[a-zA-Zà-žÀ-Ž\s'-]+$/;
 
-  if (!name.trim()) {
+  if (!name) {
     return 'Campo obbligatorio!';
   }
 
@@ -189,7 +196,7 @@ function validateName(name) {
 }
 
 function validateMessage(message) {
-  if (!message.trim()) {
+  if (!message) {
     return 'Campo obbligatorio!';
   }
 
@@ -203,14 +210,6 @@ function validateMessage(message) {
 function formValidate() {
   let isValid = true;
   isValidmail.value = true;
-  const email = validateEmail(formData.value.email);
-  if (!email) {
-    emailError.value = 'Email non valida!';
-    isValid = false;
-    isValidmail.value = false;
-  } else {
-    emailError.value = '';
-  }
 
   const errorName = validateName(formData.value.name);
   if (errorName) {
@@ -219,6 +218,15 @@ function formValidate() {
     isValidname.value = false;
   } else {
     nameError.value = '';
+  }
+
+  const email = validateEmail(formData.value.email);
+  if (!email) {
+    emailError.value = 'Email non valida!';
+    isValid = false;
+    isValidmail.value = false;
+  } else {
+    emailError.value = '';
   }
 
   const errorMessage = validateMessage(formData.value.message);

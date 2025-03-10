@@ -34,36 +34,36 @@ import { ref, onMounted } from 'vue';
 const backgroundStyle = ref({});
 
 // Funzione per caricare l'immagine come stream dal backend
-const loadImageUrl = async () => {
-  const imageUrl =
-    'https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/images/foto-me.png';
-  const imageUrlLocal = 'http://localhost:5173/images/foto-me.png';
+// const loadImageUrl = async () => {
+//   const imageUrl =
+//     'https://thomas-mach-portfolio-8d5453a6da87.herokuapp.com/images/foto-me.png';
+//   const imageUrlLocal = 'http://localhost:5173/images/foto-me.png';
 
-  try {
-    // Ottieni l'immagine dallo stream dal backend (endpoint API)
-    const response = await fetch(imageUrl);
+//   try {
+//     // Ottieni l'immagine dallo stream dal backend (endpoint API)
+//     const response = await fetch(imageUrl);
 
-    if (response.ok) {
-      // Converte la risposta in un blob (oggetto binario)
-      const imageBlob = await response.blob();
+//     if (response.ok) {
+//       // Converte la risposta in un blob (oggetto binario)
+//       const imageBlob = await response.blob();
 
-      // Crea un URL temporaneo per il blob ricevuto
-      const imageUrl = URL.createObjectURL(imageBlob);
+//       // Crea un URL temporaneo per il blob ricevuto
+//       const imageUrl = URL.createObjectURL(imageBlob);
 
-      // Imposta lo stile dinamico per il background
-      backgroundStyle.value = {
-        backgroundImage: `url(${imageUrl})`, // Usa l'URL temporaneo come background
-      };
-    } else {
-      console.error("Errore nel caricamento dell'immagine");
-    }
-  } catch (error) {
-    console.error("Errore durante il caricamento dell'immagine:", error);
-  }
-};
+//       // Imposta lo stile dinamico per il background
+//       backgroundStyle.value = {
+//         backgroundImage: `url(${imageUrl})`, // Usa l'URL temporaneo come background
+//       };
+//     } else {
+//       console.error("Errore nel caricamento dell'immagine");
+//     }
+//   } catch (error) {
+//     console.error("Errore durante il caricamento dell'immagine:", error);
+//   }
+// };
 
 // Carica l'immagine al momento del montaggio del componente
-onMounted(loadImageUrl);
+// onMounted(loadImageUrl);
 </script>
 
 <style scoped>
@@ -144,7 +144,7 @@ onMounted(loadImageUrl);
   height: 380px;
   margin-left: auto;
   margin-right: auto;
-  /* background-image: url(../../images/foto-me.png); */
+  background-image: url(../images/foto-me.png);
   background-size: cover;
   background-position: center;
 }

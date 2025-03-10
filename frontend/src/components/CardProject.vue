@@ -13,14 +13,45 @@
     <div class="links-wrapper">
       <div class="links-box">
         <a class="link" target="_blank" :href="linkProject">vedi progetto</a>
-        <a class="link" target="_blank" :href="linkCode">vedi codice</a>
+        <div class="links-code-wrapper">
+          <a
+            @click="handleShowLinks($event)"
+            class="link"
+            target="_blank"
+            :href="
+              linkCode === 'frontend-backend' ? 'javascript:void(0)' : linkCode
+            "
+            >vedi codice
+          </a>
+          <div class="links-front-back-wrapper" :class="{ show: showLinks }">
+            <a
+              v-if="showLinks"
+              @click="showLinks = false"
+              class="link-frontend"
+              target="_blank"
+              :href="linkCodeFrontend"
+              >frontend</a
+            >
+            <a
+              v-if="showLinks"
+              @click="showLinks = false"
+              class="link-backend"
+              target="_blank"
+              :href="linkCodeBackend"
+              >backend</a
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { ref, onMounted, onUnmounted } from 'vue';
+let showLinks = ref(false);
+
+const props = defineProps({
   title: {
     type: String,
     required: true,
@@ -33,6 +64,14 @@ defineProps({
     type: String,
     required: true,
   },
+  linkCodeFrontend: {
+    type: String,
+    required: false,
+  },
+  linkCodeBackend: {
+    type: String,
+    required: false,
+  },
   linkCode: {
     type: String,
     required: true,
@@ -42,6 +81,13 @@ defineProps({
     required: true,
   },
 });
+
+const handleShowLinks = (event) => {
+  if (props.linkCode === 'frontend-backend') {
+    event.preventDefault();
+    return (showLinks.value = !showLinks.value);
+  } else showLinks.value = false;
+};
 </script>
 
 <style scoped>
@@ -50,7 +96,7 @@ defineProps({
   /* border: 1px solid yellow; */
   display: flex;
   flex-direction: column;
-  margin-bottom: 2.5em;
+  margin-bottom: 3em;
   position: relative;
 }
 
@@ -81,15 +127,18 @@ defineProps({
 }
 
 .links-wrapper {
-  margin-top: 2em;
+  margin-top: 0.75em;
+  position: relative;
 }
 
 .links-box {
   display: flex;
   gap: 1.5em;
+  position: relative;
 }
 
 .link {
+  align-self: flex-start;
   justify-self: center;
   text-transform: uppercase;
   font-weight: var(--fw-bold);
@@ -99,6 +148,42 @@ defineProps({
   transition: color 0.3s ease-in-out;
   font-size: var(--fs-body);
   grid-area: link;
+  z-index: 100000;
+}
+
+.links-code-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.link-frontend,
+.link-backend {
+  text-align: center;
+  background-color: var(--clr-dark);
+  text-transform: uppercase;
+  font-weight: var(--fw-bold);
+  border-bottom: 2px solid var(--clr-accent);
+  letter-spacing: 2.3px;
+  padding-bottom: 0.75em;
+  font-size: var(--fs-body);
+}
+
+.links-front-back-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 10%;
+  left: 0;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.links-front-back-wrapper.show {
+  opacity: 1;
+  transform: translateY(100px);
 }
 
 @media (min-width: 600px) {
@@ -127,6 +212,11 @@ defineProps({
     margin: 0 auto;
   }
 
+  .link-frontend,
+  .link-backend {
+    background-color: inherit;
+  }
+
   .img-wrapper {
     position: relative;
   }
@@ -150,7 +240,9 @@ defineProps({
     }
   }
 
-  .link:hover {
+  .link:hover,
+  .link-frontend:hover,
+  .link-backend:hover {
     color: var(--clr-accent);
   }
 }

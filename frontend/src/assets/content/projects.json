@@ -1,5 +1,15 @@
 [
   {
+    "title": "auth app",
+    "description": "",
+    "technologies": ["HTML", "CSS", "Javascript", "Vue.js", "Node.js"],
+    "linkProject": "https://thomas-mach.github.io/auth-app-frontend/",
+    "linkCode": "frontend-backend",
+    "linkCodeFrontend": "https://github.com/thomas-mach/auth-app-frontend.git",
+    "linkCodeBackend": "https://github.com/thomas-mach/auth-app-backend.git",
+    "image": "/images/projects/auth-app.png"
+  },
+  {
     "title": "git hunt",
     "description": "",
     "technologies": ["HTML", "CSS", "Javascript", "Vue.js", "Node.js"],
