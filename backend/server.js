@@ -12,7 +12,7 @@ const os = require('os');
 const app = express();
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
-  // origin: '*',
+  origin: '*',
   methods: 'GET,POST',
   allowedHeaders: 'Content-Type',
 };
@@ -20,42 +20,6 @@ app.use(cors(corsOptions));
 
 // Serve i file statici dal build del frontend
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/images/:filename', (req, res) => {
-  const { filename } = req.params;
-  const imagePath = path.join(__dirname, 'public', filename); // Percorso dell'immagine
-
-  // Verifica se il file esiste
-  fs.access(imagePath, fs.constants.F_OK, (err) => {
-    if (err) {
-      return res.status(404).send('File non trovato');
-    }
-
-    // Impostiamo il tipo di contenuto in base al tipo di immagine
-    const ext = path.extname(filename).toLowerCase();
-    if (ext === '.png') {
-      res.setHeader('Content-Type', 'image/png');
-    } else if (ext === '.jpg' || ext === '.jpeg') {
-      res.setHeader('Content-Type', 'image/jpeg');
-    } else if (ext === '.gif') {
-      res.setHeader('Content-Type', 'image/gif');
-    } else {
-      return res.status(415).send('Tipo di file non supportato');
-    }
-
-    // Stream dell'immagine al client
-    const imageStream = fs.createReadStream(imagePath);
-    imageStream.pipe(res);
-
-    imageStream.on('open', () => console.log('📡 Streaming in corso...'));
-
-    // Gestione errori
-    imageStream.on('error', (err) => {
-      console.error('Errore durante lo streaming del file:', err);
-      res.status(500).send("Errore durante il caricamento dell'immagine");
-    });
-  });
-});
 
 // Catch-all per SPA (Single Page Application)
 app.get('*', (req, res) => {
@@ -140,23 +104,6 @@ app.post(
     }
   }
 );
-
-// setInterval(() => {
-//   const memoryUsage = process.memoryUsage(); // Uso memoria del processo
-//   const freeMem = os.freemem() / 1e6; // RAM libera in MB
-//   const totalMem = os.totalmem() / 1e6; // RAM totale in MB
-
-//   console.log('🔹 Memoria usata (MB):', (memoryUsage.rss / 1e6).toFixed(2));
-//   console.log(
-//     '🔹 Memoria libera (MB):',
-//     freeMem.toFixed(2),
-//     '/',
-//     totalMem.toFixed(2)
-//   );
-//   console.log('🔹 Numero CPU:', os.cpus().length);
-//   console.log('🔹 Uptime server (minuti):', (os.uptime() / 60).toFixed(2));
-//   console.log('----------------------------');
-// }, 5000); // Stampa ogni 5 secondi
 
 app.listen(PORT, () => {
   console.log(`Server backend in esecuzione su http://localhost:${PORT}`);
