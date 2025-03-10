@@ -148,7 +148,6 @@ const handleShowLinks = (event) => {
   transition: color 0.3s ease-in-out;
   font-size: var(--fs-body);
   grid-area: link;
-  z-index: 100000;
 }
 
 .links-code-wrapper {
@@ -176,7 +175,7 @@ const handleShowLinks = (event) => {
   position: absolute;
   bottom: 10%;
   left: 0;
-  z-index: 1000;
+  z-index: 100;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
